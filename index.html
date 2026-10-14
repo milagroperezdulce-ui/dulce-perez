@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Inicio | Veterinaria Patitas Felices</title>
+
+    <link rel="stylesheet" href="css/style.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, Helvetica, sans-serif;
+            background: #f2f8f7;
+            color: #333;
+        }
+
+        #background {
+            min-height: 100vh;
+            background: linear-gradient(180deg, #d9f5ee, #ffffff);
+            padding-bottom: 30px;
+        }
+
+        #page {
+            width: 92%;
+            max-width: 1100px;
+            margin: auto;
+        }
+
+        /* ENCABEZADO */
+        #header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 15px;
+            padding: 20px 0;
+        }
+
+        #logo a {
+            display: block;
+            color: #087f8c;
+            text-decoration: none;
+            font-size: 28px;
+            font-weight: bold;
+        }
+
+        #logo span {
+            display: block;
+            color: #ef8354;
+            font-size: 12px;
+            letter-spacing: 2px;
+            margin-top: 6px;
+        }
+
+        /* MENÚ */
+        #navigation {
+            position: relative;
+            z-index: 10;
+        }
+
+        #navigation ul {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #navigation li {
+            margin: 0;
+            padding: 0;
+        }
+
+        #navigation a {
+            display: block;
+            padding: 12px 15px;
+            color: #087f8c;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        #navigation a:hover,
+        #navigation li.selected a {
+            background: #087f8c;
+            color: #ffffff;
+        }
+
+        /* BANNER */
+        #banner {
+            background: linear-gradient(120deg, #087f8c, #12a5a1);
+            color: #ffffff;
+            text-align: center;
+            padding: 45px 20px;
+            border-radius: 15px;
+            margin: 15px 0 30px;
+            box-shadow: 0 5px 15px rgba(0, 90, 100, 0.12);
+        }
+
+        #banner h1 {
+            font-size: 36px;
+            line-height: 1.3;
+            margin: 0 0 15px;
+        }
+
+        #banner p {
+            max-width: 760px;
+            margin: auto;
+            font-size: 17px;
+            line-height: 1.8;
+        }
+
+        /* BOTONES */
+        .boton {
+            display: inline-block;
+            margin: 20px 5px 0;
+            padding: 13px 22px;
+            background: #ef8354;
+            color: #ffffff;
+            text-decoration: none;
+            font-weight: bold;
+            border-radius: 8px;
+            transition: background 0.3s, transform 0.3s;
+        }
+
+        .boton:hover {
+            background: #d9683b;
+            transform: translateY(-2px);
+        }
+
+        /* CONTENIDO */
+        #contents {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
+        }
+
+        .titulo-seccion {
+            text-align: center;
+            color: #087f8c;
+            font-size: 29px;
+            margin: 5px 0 12px;
+        }
+
+        .descripcion {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            text-align: center;
+            line-height: 1.8;
+            color: #555555;
+        }
+
+        /* TARJETAS */
+        #tarjetas {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 22px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        #tarjetas li {
+            min-width: 0;
+            background: #f5fbfa;
+            border: 1px solid #d5eeea;
+            border-radius: 14px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 90, 100, 0.08);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        #tarjetas li:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+        }
+
+        /*
+          IMÁGENES COMPLETAS:
+          - contain evita recortar las fotografías.
+          - El ancho se adapta a cada tarjeta.
+          - La altura es uniforme.
+          - El fondo rellena los espacios que sobren.
+        */
+        #tarjetas li > a:first-child {
+            display: flex;
+            width: 100%;
+            height: 250px;
+            align-items: center;
+            justify-content: center;
+            padding: 8px;
+            background: #eaf6f3;
+            border-bottom: 1px solid #d5eeea;
+        }
+
+        #tarjetas img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            object-position: center;
+        }
+
+        #tarjetas h2 {
+            margin: 18px 18px 10px;
+            color: #087f8c;
+            font-size: 21px;
+            line-height: 1.4;
+        }
+
+        #tarjetas p {
+            margin: 0 18px 18px;
+            line-height: 1.7;
+            font-size: 15px;
+        }
+
+        .enlace {
+            display: inline-block;
+            margin: 0 18px 20px;
+            color: #087f8c;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .enlace:hover {
+            color: #ef8354;
+            text-decoration: underline;
+        }
+
+        /* CONSEJOS */
+        .consejos {
+            margin-top: 30px;
+            padding: 25px;
+            background: #fff2e9;
+            border-left: 6px solid #ef8354;
+            border-radius: 12px;
+        }
+
+        .consejos h2 {
+            margin-top: 0;
+            color: #c75b2a;
+        }
+
+        .consejos ul {
+            padding-left: 22px;
+        }
+
+        .consejos li {
+            line-height: 2;
+        }
+
+        /* MENSAJE FINAL */
+        .bienvenida {
+            padding: 25px 10px 10px;
+            text-align: center;
+        }
+
+        .bienvenida h2 {
+            color: #087f8c;
+        }
+
+        .bienvenida p {
+            line-height: 1.8;
+        }
+
+        /* PIE DE PÁGINA */
+        #footer {
+            margin-top: 25px;
+            padding: 25px 20px;
+            background: #075b63;
+            color: #ffffff;
+            text-align: center;
+            border-radius: 12px;
+        }
+
+        #footer p {
+            line-height: 1.7;
+        }
+
+        #footer a {
+            color: #ffe0c9;
+            text-decoration: none;
+        }
+
+        #footer a:hover {
+            text-decoration: underline;
+        }
+
+        /* TABLETAS */
+        @media (max-width: 800px) {
+            #page {
+                width: 94%;
+            }
+
+            #header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            #navigation ul {
+                justify-content: center;
+            }
+
+            #tarjetas li > a:first-child {
+                height: 230px;
+            }
+        }
+
+        /* CELULARES */
+        @media (max-width: 520px) {
+            #page {
+                width: 94%;
+            }
+
+            #logo a {
+                font-size: 23px;
+            }
+
+            #logo span {
+                font-size: 10px;
+                letter-spacing: 1px;
+            }
+
+            #navigation {
+                width: 100%;
+            }
+
+            #navigation ul {
+                gap: 4px;
+            }
+
+            #navigation a {
+                padding: 9px;
+                font-size: 13px;
+            }
+
+            #banner {
+                padding: 30px 15px;
+            }
+
+            #banner h1 {
+                font-size: 27px;
+            }
+
+            #banner p {
+                font-size: 15px;
+            }
+
+            #contents {
+                padding: 15px;
+            }
+
+            .titulo-seccion {
+                font-size: 24px;
+            }
+
+            #tarjetas {
+                grid-template-columns: 1fr;
+            }
+
+            #tarjetas li > a:first-child {
+                height: 250px;
+            }
+
+            #tarjetas h2 {
+                font-size: 20px;
+            }
+
+            .consejos {
+                padding: 18px;
+            }
+
+            .boton {
+                margin: 12px 4px 0;
+                padding: 12px 15px;
+            }
+        }
+
+        /* ACCESIBILIDAD */
+        @media (prefers-reduced-motion: reduce) {
+            html {
+                scroll-behavior: auto;
+            }
+
+            #tarjetas li,
+            .boton {
+                transition: none;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="background">
+    <div id="page">
+
+        <!-- ENCABEZADO -->
+        <header id="header">
+
+            <div id="logo">
+                <a href="index.html">
+                    Veterinaria Patitas Felices
+                    <span>AMOR, CUIDADO Y SALUD ANIMAL</span>
+                </a>
+            </div>
+
+            <!-- MENÚ PRINCIPAL -->
+            <nav id="navigation" aria-label="Menú principal">
+                <ul>
+                    <li class="selected">
+                        <a href="index.html" aria-current="page">Inicio</a>
+                    </li>
+
+                    <li>
+                        <a href="about.html">Nosotros</a>
+                    </li>
+
+                    <li>
+                        <a href="petmart.html">Servicios</a>
+                    </li>
+
+                    <li>
+                        <a href="blog.html">Consejos</a>
+                    </li>
+
+                    <li>
+                        <a href="contact.html">Contacto</a>
+                    </li>
+                </ul>
+            </nav>
+
+        </header>
+
+        <!-- BANNER -->
+        <section id="banner">
+
+            <h1>¡Bienvenidos a Patitas Felices!</h1>
+
+            <p>
+                Amor, salud y bienestar para tus mejores amigos.
+                Nos importa el cuidado de tus mascotas y queremos ayudarte
+                a mantenerlas sanas, felices y llenas de energía.
+            </p>
+
+            <a class="boton" href="petmart.html">
+                Conoce nuestros servicios
+            </a>
+
+            <a class="boton" href="contact.html">
+                Contáctanos
+            </a>
+
+        </section>
+
+        <!-- CONTENIDO PRINCIPAL -->
+        <main id="contents">
+
+            <h2 class="titulo-seccion">
+                Todo para el bienestar de tu mascota
+            </h2>
+
+            <p class="descripcion">
+                Descubre información sobre salud, alimentación, higiene
+                y cuidados responsables para perros, gatos y otros
+                animales de compañía.
+            </p>
+
+            <!-- TARJETAS -->
+            <ul id="tarjetas">
+
+                <li>
+                    <a href="petmart.html">
+                        <img
+                            src="images/puppy.jpg"
+                            alt="Cachorro que necesita cuidados"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <h2>Consultas veterinarias</h2>
+
+                    <p>
+                        Conoce la importancia de revisar la salud de tu
+                        mascota y de buscar atención profesional cuando
+                        lo necesite.
+                    </p>
+
+                    <a class="enlace" href="petmart.html">
+                        Explorar servicios →
+                    </a>
+                </li>
+
+                <li>
+                    <a href="petmart.html">
+                        <img
+                            src="images/cat.jpg"
+                            alt="Gato doméstico"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <h2>Atención para mascotas</h2>
+
+                    <p>
+                        Aprende sobre la prevención, las vacunas y los
+                        cuidados importantes para mantener saludables
+                        a tus animales de compañía.
+                    </p>
+
+                    <a class="enlace" href="petmart.html">
+                        Ver servicios →
+                    </a>
+                </li>
+
+                <li>
+                    <a href="blog.html">
+                        <img
+                            src="images/michi2.jpg"
+                            alt="Alimentación para mascotas"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <h2>Alimentación saludable</h2>
+
+                    <p>
+                        Descubre por qué debes proporcionar alimentos
+                        apropiados para la especie, la edad y las
+                        necesidades de cada mascota.
+                    </p>
+
+                    <a class="enlace" href="blog.html">
+                        Leer consejos →
+                    </a>
+                </li>
+
+                <li>
+                    <a href="about.html">
+                        <img
+                            src="images/friendly-pets.jpg"
+                            alt="Mascotas disfrutando de compañía"
+                            loading="lazy"
+                        >
+                    </a>
+
+                    <h2>Amor por los animales</h2>
+
+                    <p>
+                        Un hogar seguro, el cariño y la atención diaria
+                        ayudan a que las mascotas tengan una vida
+                        más feliz.
+                    </p>
+
+                    <a class="enlace" href="about.html">
+                        Conócenos →
+                    </a>
+                </li>
+
+            </ul>
+
+            <!-- CONSEJOS -->
+            <section class="consejos">
+
+                <h2>Consejos para cuidar a tu mascota</h2>
+
+                <ul>
+                    <li>Proporciona agua limpia y alimento adecuado.</li>
+                    <li>Mantén al día sus vacunas y revisiones veterinarias.</li>
+                    <li>Limpia regularmente su cama y sus recipientes.</li>
+                    <li>Dedica tiempo al juego, al ejercicio y al cariño.</li>
+                    <li>Procura que tenga un espacio limpio y seguro.</li>
+                    <li>Consulta con un veterinario si notas cambios en su salud.</li>
+                </ul>
+
+            </section>
+
+            <!-- MENSAJE FINAL -->
+            <section class="bienvenida">
+
+                <h2>¡Ellos también son parte de la familia!</h2>
+
+                <p>
+                    En Veterinaria Patitas Felices promovemos el respeto,
+                    la prevención y la tenencia responsable. Cada mascota
+                    merece vivir con salud, seguridad y cariño.
+                </p>
+
+                <a class="boton" href="contact.html">
+                    Solicitar información
+                </a>
+
+            </section>
+
+        </main>
+
+        <!-- PIE DE PÁGINA -->
+        <footer id="footer">
+
+            <p><strong>Veterinaria Patitas Felices</strong></p>
+
+            <p>Amor, cuidado y salud para tus mejores amigos.</p>
+
+            <p>
+                <a href="index.html">Inicio</a> |
+                <a href="about.html">Nosotros</a> |
+                <a href="petmart.html">Servicios</a> |
+                <a href="blog.html">Consejos</a> |
+                <a href="contact.html">Contacto</a>
+            </p>
+
+            <p>
+                &copy; 2026 Veterinaria Patitas Felices.
+                Todos los derechos reservados.
+            </p>
+
+        </footer>
+
+    </div>
+</div>
+
+</body>
+</html>
